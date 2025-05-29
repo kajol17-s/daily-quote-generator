@@ -4,12 +4,10 @@ const newQuoteBtn = document.getElementById('new-quote');
 
 async function fetchQuote() {
   try {
-    const res = await fetch('https://type.fit/api/quotes');
-    const quotes = await res.json();
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[randomIndex];
-    quoteText.textContent = \`"\${quote.text}"\`;
-    authorText.textContent = quote.author ? \`– \${quote.author}\` : "– Unknown";
+    const res = await fetch('https://api.quotable.io/random');
+    const data = await res.json();
+    quoteText.textContent = `"${data.content}"`;
+    authorText.textContent = `– ${data.author}`;
   } catch (error) {
     quoteText.textContent = "Oops! Failed to load quote.";
     authorText.textContent = "";
